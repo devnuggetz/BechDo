@@ -3,6 +3,7 @@ import { FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View } f
 import ListItems from '../components/ListItems'
 import Screen from '../components/Screen'
 import ListItemSeparator from '../components/ListItemSeparator'
+import ListItemDelete from '../components/ListItemDelete'
 
 
 const messages= [
@@ -25,11 +26,13 @@ const MessagesScreen = () => {
             <FlatList
             data={messages}
             keyExtractor={message=>message.id.toString()}
-            renderItem={({item})=><ListItems 
-            title={item.title}
-            subtitle={item.description}
-            image={item.image}
-            onPress={()=> console.log("Your Message is: ", item)}
+            renderItem={({item})=>
+            <ListItems 
+                title={item.title}
+                subtitle={item.description}
+                image={item.image}
+                onPress={()=> console.log("Your Message is: ", item)}
+                renderRightActions={ListItemDelete}
             />}
             ItemSeparatorComponent={ListItemSeparator}
         />
