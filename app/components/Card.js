@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 import colors from '../config/colors'
 import AppText from './AppText'
 
@@ -12,7 +13,7 @@ const Card = ({title, subtitle, image}) => {
             />
             <View style={styles.detailsContainer}>
                 <AppText style={styles.title}>{title}</AppText>
-                <AppText>{subtitle}</AppText>
+                <AppText style={styles.subtitle}>{subtitle}</AppText>
             </View>
         </View>
     )
@@ -24,7 +25,8 @@ const styles = StyleSheet.create({
     card: {
         borderRadius: 15,
         backgroundColor: colors.white,
-        marginBottom: 20
+        marginBottom: 20,
+        overflow: "hidden"
     },
     detailsContainer: {
         padding: 20
@@ -36,4 +38,8 @@ const styles = StyleSheet.create({
     title: {
         marginBottom: 7
     },
+    subtitle: {
+        color: colors.secondary,
+        fontWeight: "bold",
+    }
 })
