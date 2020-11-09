@@ -1,6 +1,5 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
 import colors from '../config/colors'
 import AppText from './AppText'
 
@@ -9,7 +8,7 @@ const Card = ({title, subtitle, image}) => {
         <View style={styles.card}>
             <Image  
             style={styles.image}
-            source={require(image)}
+            source={image}
             />
             <View style={styles.detailsContainer}>
                 <AppText style={styles.title}>{title}</AppText>
