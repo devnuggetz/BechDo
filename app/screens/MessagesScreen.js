@@ -33,6 +33,7 @@ const initialMessages= [
     },
 ]
 const MessagesScreen = () => {
+    const [refreshing, setRefreshing]= useState(false)
     const [messages, setMessages]= useState(initialMessages)
     const handleDelete=(message)=>{
      const newMessages= messages.filter(m=>m.id!==message.id)
@@ -41,21 +42,23 @@ const MessagesScreen = () => {
     return (
         <Screen style={styles.screen}>
             <FlatList
-            data={messages}
-            keyExtractor={message=>message.id.toString()}
-            renderItem={({item})=>
-            <ListItems 
-                title={item.title}
-                subtitle={item.description}
-                image={item.image}
-                onPress={()=> console.log("Your Message is: ", item)}
-                renderRightActions={()=> 
-                <ListItemDelete 
-                    onPress={()=>handleDelete(item)}
+                data={messages}
+                keyExtractor={message=>message.id.toString()}
+                renderItem={({item})=>
+                <ListItems 
+                    title={item.title}
+                    subtitle={item.description}
+                    image={item.image}
+                    onPress={()=> console.log("Your Message is: ", item)}
+                    renderRightActions={()=> 
+                    <ListItemDelete 
+                        onPress={()=>handleDelete(item)}
+                    />}
+                    
                 />}
-            />}
-            ItemSeparatorComponent={ListItemSeparator}
-        />
+                ItemSeparatorComponent={ListItemSeparator}
+                refreshing={refreshing}
+            />
         </Screen>   
     )
 }
