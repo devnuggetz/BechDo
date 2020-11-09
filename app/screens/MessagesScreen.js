@@ -29,6 +29,7 @@ const MessagesScreen = () => {
             title={item.title}
             subtitle={item.description}
             image={item.image}
+            onPress={()=> console.log("Your Message is: ", item)}
             />}
             ItemSeparatorComponent={ListItemSeparator}
         />
