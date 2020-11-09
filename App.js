@@ -10,11 +10,15 @@ import ListingsScreen from './app/screens/ListingsScreen';
 import MessagesScreen from './app/screens/MessagesScreen';
 import ViewImageScreen from './app/screens/ViewImageScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
+import AppTextInput from './app/components/AppTextInput'
 
 
 export default function App() {
   return (
-    <ListingsScreen />
+    <AppTextInput 
+    placeholder='Username'
+    icon='email'
+    />
   );
 }
 
