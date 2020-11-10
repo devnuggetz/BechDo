@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import * as Yup from "yup";
 
-import { AppForm, AppFormField } from "../components/forms";
+import { AppForm, AppFormField, SubmitButton } from "../components/forms";
 import AppFormPicker from "../components/forms/AppFormPicker";
 import Screen from "../components/Screen";
 
@@ -47,7 +47,19 @@ const ListingEditScreen = () => {
           name="price"
           placeholder="Price"
         />
-        <AppFormPicker />
+        <AppFormPicker
+          items={categories}
+          name="category"
+          placeholder="Category"
+        />
+        <AppFormField
+          maxLength={255}
+          multiline
+          name="description"
+          placeholder="Description"
+          numberOfLines={3}
+        />
+        <SubmitButton title="Post" />
       </AppForm>
     </Screen>
   );
@@ -55,4 +67,8 @@ const ListingEditScreen = () => {
 
 export default ListingEditScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+});
