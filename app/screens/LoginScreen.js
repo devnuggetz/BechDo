@@ -41,6 +41,7 @@ const LoginScreen = () => {
               textContentType="password"
               secureTextEntry
             />
+            <AppText style={{ color: "red" }}>{errors.password}</AppText>
             <AppButton title="Login" onPress={handleSubmit} />
           </>
         )}
