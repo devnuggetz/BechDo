@@ -16,6 +16,7 @@ import defaultStyles from "../config/styles";
 import AppText from "./AppText";
 import Screen from "./Screen";
 import PickerItem from "./PickerItem";
+import AppButton from "./AppButton";
 
 const AppPicker = ({
   icon,
@@ -49,7 +50,7 @@ const AppPicker = ({
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
-          <Button onPress={() => setModalVisible(false)} title="Close" />
+          <AppButton onPress={() => setModalVisible(false)} title="Close" />
           <FlatList
             data={items}
             keyExtractor={(item) => item.value.toString()}
