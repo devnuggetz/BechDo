@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  FlatList,
-  Platform,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import ListItems from "../components/ListItems";
 import Screen from "../components/Screen";
 import ListItemSeparator from "../components/ListItemSeparator";
@@ -68,6 +60,9 @@ const MessagesScreen = () => {
         )}
         ItemSeparatorComponent={ListItemSeparator}
         refreshing={refreshing}
+        onRefresh={() => {
+          alert("Refreshed");
+        }}
       />
     </Screen>
   );
