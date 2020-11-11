@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import Icon from "./app/components/Icon";
 import ListItems from "./app/components/ListItems";
 import Screen from "./app/components/Screen";
@@ -18,8 +19,13 @@ import ImageInput from "./app/components/ImageInput";
 import * as ImagePicker from "expo-image-picker";
 import ImageInputList from "./app/components/ImageInputList";
 import RegisterScreen from "./app/screens/RegisterScreen";
+import AuthNavigator from "./app/navigation/AuthNavigator";
 export default function App() {
-  return <RegisterScreen />;
+  return (
+    <NavigationContainer>
+      <AuthNavigator />
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({});
