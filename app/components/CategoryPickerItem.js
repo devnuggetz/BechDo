@@ -6,12 +6,24 @@ import Icon from "./Icon";
 const CategoryPickerItem = ({ item, onPress }) => {
   return (
     <View style={styles.container}>
-      <Icon backgroundColor={item.backgroundColor} name={item.icon} size={80} />
-      <AppText>{item.label}</AppText>
+      <Icon backgroundColor={item.backgroundColor} name={item.icon} size={70} />
+      <AppText style={styles.label}>{item.label}</AppText>
     </View>
   );
 };
 
 export default CategoryPickerItem;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    alignItems: "center",
+    width: "33%",
+  },
+  label: {
+    marginTop: 5,
+    fontSize: 14,
+    textAlign: "center",
+  },
+});
