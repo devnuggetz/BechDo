@@ -18,17 +18,7 @@ import ImageInput from "./app/components/ImageInput";
 import * as ImagePicker from "expo-image-picker";
 import ImageInputList from "./app/components/ImageInputList";
 export default function App() {
-  const [imageUris, setImageUris] = useState([]);
-  return (
-    <Screen>
-      <ImageInputList
-        onChangeImage={(uri) => setImageUri(uri)}
-        imageUris={imageUris}
-        onAddImage={(uri) => handleAdd(uri)} // can also be written as onAddImage={handleAdd}
-        onRemoveImage={handleRemove}
-      />
-    </Screen>
-  );
+  return <ListingEditScreen />;
 }
 
 const styles = StyleSheet.create({});
