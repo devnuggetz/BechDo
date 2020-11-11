@@ -2,6 +2,7 @@ import { useFormikContext } from "formik";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import AppPicker from "../AppPicker";
+import AppText from "../AppText";
 
 const AppFormPicker = ({
   items,

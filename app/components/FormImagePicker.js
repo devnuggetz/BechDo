@@ -1,6 +1,7 @@
 import { useFormikContext } from "formik";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import AppText from "./AppText";
 import ImageInputList from "./ImageInputList";
 
 const FormImagePicker = ({ name }) => {
