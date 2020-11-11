@@ -17,8 +17,9 @@ import ListingEditScreen from "./app/screens/ListingEditScreen";
 import ImageInput from "./app/components/ImageInput";
 import * as ImagePicker from "expo-image-picker";
 import ImageInputList from "./app/components/ImageInputList";
+import RegisterScreen from "./app/screens/RegisterScreen";
 export default function App() {
-  return <ListingEditScreen />;
+  return <RegisterScreen />;
 }
 
 const styles = StyleSheet.create({});
