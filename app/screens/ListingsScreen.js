@@ -22,6 +22,7 @@ const ListingsScreen = ({ navigation }) => {
   return (
     <Screen style={styles.screen}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
@@ -41,7 +42,7 @@ export default ListingsScreen;
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 20,
+    padding: 8,
     backgroundColor: colors.light,
   },
 });
