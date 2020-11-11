@@ -20,9 +20,10 @@ import * as ImagePicker from "expo-image-picker";
 import ImageInputList from "./app/components/ImageInputList";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import AuthNavigator from "./app/navigation/AuthNavigator";
+import NavigationTheme from "./app/navigation/NavigationTheme";
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={NavigationTheme}>
       <AuthNavigator />
     </NavigationContainer>
   );
