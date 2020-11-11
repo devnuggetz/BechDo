@@ -18,14 +18,20 @@ const categories = [
   {
     label: "Books",
     value: 1,
+    backgroundColor: "red",
+    icon: "book",
   },
   {
     label: "Clothing",
     value: 2,
+    backgroundColor: "green",
+    icon: "book",
   },
   {
     label: "Random",
     value: 3,
+    backgroundColor: "black",
+    icon: "book",
   },
 ];
 const ListingEditScreen = () => {
@@ -51,6 +57,7 @@ const ListingEditScreen = () => {
         />
         <AppFormPicker
           items={categories}
+          numberOfColumns={3}
           name="category"
           placeholder="Category"
           width="50%"
