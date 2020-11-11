@@ -16,23 +16,23 @@ import LoginScreen from "./app/screens/LoginScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import ImageInput from "./app/components/ImageInput";
 import * as ImagePicker from "expo-image-picker";
+import ImageInputList from "./app/components/ImageInputList";
 export default function App() {
-  const [imageUri, setImageUri] = useState(
-    "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search-v2_297x176.jpg"
-  );
-  useEffect(() => {
-    requestPermission();
-  }, []);
+  const [imageUris, setImageUris] = useState([]);
 
-  const requestPermission = async () => {
-    const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
-    if (!granted) alert("You need to enable permission to access the library.");
+  const handleAdd = (uri) => {
+    setImageUris([...imageUris, uri]);
+  };
+  const handleRemove = (uri) => {
+    setImageUris(imageUris.filter((imageUri) => imageUri != uri));
   };
   return (
     <Screen>
-      <ImageInput
+      <ImageInputList
         onChangeImage={(uri) => setImageUri(uri)}
-        imageUri={imageUri}
+        imageUris={imageUris}
+        onAddImage={(uri) => handleAdd(uri)} // can also be written as onAddImage={handleAdd}
+        onRemoveImage={handleRemove}
       />
     </Screen>
   );

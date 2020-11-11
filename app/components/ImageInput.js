@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Alert,
   Image,
@@ -13,6 +13,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
 const ImageInput = ({ imageUri, onChangeImage }) => {
+  useEffect(() => {
+    requestPermission();
+  }, []);
+  const requestPermission = async () => {
+    const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
+    if (!granted) alert(" You need to enable permission to access the photos");
+  };
   const handlePress = () => {
     if (!imageUri) selectImage();
     else
