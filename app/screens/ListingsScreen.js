@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import Screen from "../components/Screen";
 import Card from "../components/Card";
 import routes from "../navigation/routes";
@@ -11,20 +17,22 @@ import AppButton from "../components/AppButton";
 const ListingsScreen = ({ navigation }) => {
   const [listings, setListings] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadListings();
   }, []);
 
   const loadListings = async () => {
+    setLoading(true);
     const response = await listingsApi.getListings();
+    setLoading(false);
     if (!response.ok) {
       return setError(true);
     }
     setError(false);
     setListings(response.data);
   };
-  console.log(listings);
   return (
     <Screen style={styles.screen}>
       {error && (
@@ -33,6 +41,8 @@ const ListingsScreen = ({ navigation }) => {
           <AppButton title="Try Again" onPress={loadListings} />
         </>
       )}
+      <ActivityIndicator animating={true} size="large" />
+      <AppText>test</AppText>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={listings}
