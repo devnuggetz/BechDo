@@ -42,7 +42,6 @@ const ListingsScreen = ({ navigation }) => {
         </>
       )}
       <ActivityIndicator animating={true} size="large" />
-      <AppText>test</AppText>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={listings}
