@@ -5,9 +5,12 @@ import Card from "../components/Card";
 import routes from "../navigation/routes";
 import colors from "../config/colors";
 import listingsApi from "../api/listings";
+import AppText from "../components/AppText";
+import AppButton from "../components/AppButton";
 
 const ListingsScreen = ({ navigation }) => {
   const [listings, setListings] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     loadListings();
@@ -15,11 +18,21 @@ const ListingsScreen = ({ navigation }) => {
 
   const loadListings = async () => {
     const response = await listingsApi.getListings();
+    if (!response.ok) {
+      return setError(true);
+    }
+    setError(false);
     setListings(response.data);
   };
   console.log(listings);
   return (
     <Screen style={styles.screen}>
+      {error && (
+        <>
+          <AppText>Error occured</AppText>
+          <AppButton title="Try Again" onPress={loadListings} />
+        </>
+      )}
       <FlatList
         showsVerticalScrollIndicator={false}
         data={listings}
