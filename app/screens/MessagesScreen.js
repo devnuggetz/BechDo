@@ -1,73 +1,71 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
-import ListItems from "../components/ListItems";
+import { FlatList, StyleSheet, View } from "react-native";
+
 import Screen from "../components/Screen";
-import ListItemSeparator from "../components/ListItemSeparator";
-import ListItemDelete from "../components/ListItemDelete";
+import {
+  ListItem,
+  ListItemDeleteAction,
+  ListItemSeparator,
+} from "../components/lists";
 
 const initialMessages = [
   {
     id: 1,
-    title: "Nandu Chai Wala",
-    description:
-      "Wassup Wassup Bro, just texting to see if everything is okay. Big fan of pasedina football club here.",
-    image: require("../assets/avatar.png"),
+    title: "Khajoor",
+    description: "Wassup Wassup Wassup?",
+    image: require("../assets/drake.png"),
   },
   {
     id: 2,
-    title: "Drake 878",
+    title: "Jaggu Palti",
     description:
-      "Wassup Wassup Bro, just texting to see if everything is okay. Big fan of pasedina football club here.",
-    image: require("../assets/avatar.png"),
-  },
-  {
-    id: 3,
-    title: "Masala Papad",
-    description:
-      "Wassup Wassup Bro, just texting to see if everything is okay. Big fan of pasedina football club here.",
-    image: require("../assets/avatar.png"),
-  },
-  {
-    id: 4,
-    title: "Rangeen Churi",
-    description:
-      "Wassup Wassup Bro, just texting to see if everything is okay. Big fan of pasedina football club here.",
-    image: require("../assets/avatar.png"),
+      "I'm interested in this item. When will you be able to post it?",
+    image: require("../assets/drake.png"),
   },
 ];
-const MessagesScreen = () => {
-  const [refreshing, setRefreshing] = useState(false);
+
+function MessagesScreen(props) {
   const [messages, setMessages] = useState(initialMessages);
+  const [refreshing, setRefreshing] = useState(false);
+
   const handleDelete = (message) => {
-    const newMessages = messages.filter((m) => m.id !== message.id);
-    setMessages(newMessages);
+    // Delete the message from messages
+    setMessages(messages.filter((m) => m.id !== message.id));
   };
+
   return (
-    <Screen style={styles.screen}>
+    <Screen>
       <FlatList
         data={messages}
         keyExtractor={(message) => message.id.toString()}
         renderItem={({ item }) => (
-          <ListItems
+          <ListItem
             title={item.title}
-            subtitle={item.description}
+            subTitle={item.description}
             image={item.image}
-            onPress={() => console.log("Your Message is: ", item)}
+            onPress={() => console.log("Message selected", item)}
             renderRightActions={() => (
-              <ListItemDelete onPress={() => handleDelete(item)} />
+              <ListItemDeleteAction onPress={() => handleDelete(item)} />
             )}
           />
         )}
         ItemSeparatorComponent={ListItemSeparator}
         refreshing={refreshing}
         onRefresh={() => {
-          alert("Refreshed");
+          setMessages([
+            {
+              id: 2,
+              title: "T2",
+              description: "D2",
+              image: require("../assets/drake.png"),
+            },
+          ]);
         }}
       />
     </Screen>
   );
-};
-
-export default MessagesScreen;
+}
 
 const styles = StyleSheet.create({});
+
+export default MessagesScreen;

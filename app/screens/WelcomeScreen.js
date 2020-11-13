@@ -1,24 +1,29 @@
 import React from "react";
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
-import AppButton from "../components/AppButton";
+import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
+
+import Button from "../components/Button";
+import routes from "../navigation/routes";
 
 function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
-      source={require("../assets/background.png")}
+      blurRadius={10}
       style={styles.background}
-      blurRadius={8}
+      source={require("../assets/background.jpg")}
     >
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/trade.png")} />
-        <Text style={styles.tagline}>Sell anything. Anywhere</Text>
+        <Image style={styles.logo} source={require("../assets/logo-red.png")} />
+        <Text style={styles.tagline}>Sell What You Don't Need</Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <AppButton title="Login" onPress={() => navigation.navigate("Login")} />
-        <AppButton
+        <Button
+          title="Login"
+          onPress={() => navigation.navigate(routes.LOGIN)}
+        />
+        <Button
           title="Register"
           color="secondary"
-          onPress={() => navigation.navigate("Register")}
+          onPress={() => navigation.navigate(routes.REGISTER)}
         />
       </View>
     </ImageBackground>
@@ -26,10 +31,6 @@ function WelcomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  logo: {
-    width: 100,
-    height: 100,
-  },
   background: {
     flex: 1,
     justifyContent: "flex-end",
@@ -38,6 +39,10 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     padding: 20,
     width: "100%",
+  },
+  logo: {
+    width: 100,
+    height: 100,
   },
   logoContainer: {
     position: "absolute",

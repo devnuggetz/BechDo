@@ -1,25 +1,19 @@
 import React from "react";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-} from "react-native";
-import colors from "../config/colors";
-import AppText from "./AppText";
+import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Text from "../Text";
+import colors from "../../config/colors";
 
-const ListItems = ({
-  image,
+function ListItem({
   title,
-  subtitle,
+  subTitle,
+  image,
+  IconComponent,
   onPress,
   renderRightActions,
-  IconComponent,
-}) => {
+}) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
@@ -27,13 +21,13 @@ const ListItems = ({
           {IconComponent}
           {image && <Image style={styles.image} source={image} />}
           <View style={styles.detailsContainer}>
-            <AppText style={styles.title} numberOfLines={1}>
+            <Text style={styles.title} numberOfLines={1}>
               {title}
-            </AppText>
-            {subtitle && (
-              <AppText numberOfLines={2} style={styles.subtitle}>
-                {subtitle}
-              </AppText>
+            </Text>
+            {subTitle && (
+              <Text style={styles.subTitle} numberOfLines={2}>
+                {subTitle}
+              </Text>
             )}
           </View>
           <MaterialCommunityIcons
@@ -45,9 +39,7 @@ const ListItems = ({
       </TouchableHighlight>
     </Swipeable>
   );
-};
-
-export default ListItems;
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -57,19 +49,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   detailsContainer: {
+    flex: 1,
     marginLeft: 10,
     justifyContent: "center",
-    flex: 1,
   },
   image: {
     width: 70,
     height: 70,
     borderRadius: 35,
   },
+  subTitle: {
+    color: colors.medium,
+  },
   title: {
     fontWeight: "500",
   },
-  subtitle: {
-    color: colors.medium,
-  },
 });
+
+export default ListItem;

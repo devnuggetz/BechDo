@@ -1,12 +1,12 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AccountScreen from "../screens/AccountScreen";
-import ListingEditScreen from "../screens/ListingEditScreen";
 import React from "react";
-import ListingsScreen from "../screens/ListingsScreen";
-import FeedNavigator from "./FeedNavigator";
-import AccountNavigator from "./AccountNavigator";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import AccountNavigator from "./AccountNavigator";
+import FeedNavigator from "./FeedNavigator";
+import ListingEditScreen from "../screens/ListingEditScreen";
 import NewListingButton from "./NewListingButton";
+import routes from "./routes";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +17,7 @@ const AppNavigator = () => (
       component={FeedNavigator}
       options={{
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="home" size={size} color={color} />
+          <MaterialCommunityIcons name="home" color={color} size={size} />
         ),
       }}
     />
@@ -27,7 +27,7 @@ const AppNavigator = () => (
       options={({ navigation }) => ({
         tabBarButton: () => (
           <NewListingButton
-            onPress={() => navigation.navigate("ListingEdit")}
+            onPress={() => navigation.navigate(routes.LISTING_EDIT)}
           />
         ),
         tabBarIcon: ({ color, size }) => (
@@ -44,10 +44,11 @@ const AppNavigator = () => (
       component={AccountNavigator}
       options={{
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="account" size={size} color={color} />
+          <MaterialCommunityIcons name="account" color={color} size={size} />
         ),
       }}
     />
   </Tab.Navigator>
 );
+
 export default AppNavigator;

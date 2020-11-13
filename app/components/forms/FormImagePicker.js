@@ -1,22 +1,24 @@
-import { useFormikContext } from "formik";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import AppText from "./AppText";
-import ImageInputList from "./ImageInputList";
+import { useFormikContext } from "formik";
 
-const FormImagePicker = ({ name }) => {
+import ErrorMessage from "./ErrorMessage";
+import ImageInputList from "../ImageInputList";
+
+function FormImagePicker({ name }) {
   const { errors, setFieldValue, touched, values } = useFormikContext();
   const imageUris = values[name];
 
   const handleAdd = (uri) => {
     setFieldValue(name, [...imageUris, uri]);
   };
+
   const handleRemove = (uri) => {
     setFieldValue(
       name,
-      imageUris.filter((imageUri) => imageUri != uri)
+      imageUris.filter((imageUri) => imageUri !== uri)
     );
   };
+
   return (
     <>
       <ImageInputList
@@ -24,13 +26,9 @@ const FormImagePicker = ({ name }) => {
         onAddImage={handleAdd}
         onRemoveImage={handleRemove}
       />
-      {touched[name] && (
-        <AppText style={{ color: "red" }}>{errors[name]}</AppText>
-      )}
+      <ErrorMessage error={errors[name]} visible={touched[name]} />
     </>
   );
-};
+}
 
 export default FormImagePicker;
-
-const styles = StyleSheet.create({});

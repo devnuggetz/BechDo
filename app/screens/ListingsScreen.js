@@ -1,55 +1,39 @@
-import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import Screen from "../components/Screen";
+import React, { useEffect } from "react";
+import { FlatList, StyleSheet } from "react-native";
+
+import ActivityIndicator from "../components/ActivityIndicator";
+import Button from "../components/Button";
 import Card from "../components/Card";
-import routes from "../navigation/routes";
 import colors from "../config/colors";
 import listingsApi from "../api/listings";
-import AppText from "../components/AppText";
-import AppButton from "../components/AppButton";
+import routes from "../navigation/routes";
+import Screen from "../components/Screen";
+import AppText from "../components/Text";
+import useApi from "../hooks/useApi";
 
-const ListingsScreen = ({ navigation }) => {
-  const [listings, setListings] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+function ListingsScreen({ navigation }) {
+  const getListingsApi = useApi(listingsApi.getListings);
 
   useEffect(() => {
-    loadListings();
+    getListingsApi.request();
   }, []);
 
-  const loadListings = async () => {
-    setLoading(true);
-    const response = await listingsApi.getListings();
-    setLoading(false);
-    if (!response.ok) {
-      return setError(true);
-    }
-    setError(false);
-    setListings(response.data);
-  };
   return (
     <Screen style={styles.screen}>
-      {error && (
+      {getListingsApi.error && (
         <>
-          <AppText>Error occured</AppText>
-          <AppButton title="Try Again" onPress={loadListings} />
+          <AppText>Couldn't retrieve the listings.</AppText>
+          <Button title="Retry" onPress={getListingsApi.request} />
         </>
       )}
-      <ActivityIndicator animating={true} size="large" />
+      <ActivityIndicator visible={getListingsApi.loading} />
       <FlatList
-        showsVerticalScrollIndicator={false}
-        data={listings}
+        data={getListingsApi.data}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
           <Card
             title={item.title}
-            subtitle={"₹" + item.price}
+            subTitle={"$" + item.price}
             imageUrl={item.images[0].url}
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
@@ -57,13 +41,13 @@ const ListingsScreen = ({ navigation }) => {
       />
     </Screen>
   );
-};
-
-export default ListingsScreen;
+}
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 8,
+    padding: 20,
     backgroundColor: colors.light,
   },
 });
+
+export default ListingsScreen;

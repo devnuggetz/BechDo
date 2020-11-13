@@ -1,48 +1,48 @@
 import React from "react";
-import { Image, StyleSheet } from "react-native";
-import Screen from "../components/Screen";
+import { StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
 
-import { AppForm, AppFormField, SubmitButton } from "../components/forms";
+import Screen from "../components/Screen";
+import { Form, FormField, SubmitButton } from "../components/forms";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(4).label("Password"),
 });
-const LoginScreen = () => {
+
+function LoginScreen(props) {
   return (
     <Screen style={styles.container}>
-      <Image style={styles.logo} source={require("../assets/trade.png")} />
-      <AppForm
+      <Image style={styles.logo} source={require("../assets/logo-red.png")} />
+
+      <Form
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        <AppFormField
-          placeholder="Email"
+        <FormField
+          autoCapitalize="none"
+          autoCorrect={false}
           icon="email"
           keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          textContentType="emailAddress"
           name="email"
+          placeholder="Email"
+          textContentType="emailAddress"
         />
-        <AppFormField
-          placeholder="Password"
-          name="password"
-          icon="lock"
+        <FormField
           autoCapitalize="none"
           autoCorrect={false}
-          textContentType="password"
+          icon="lock"
+          name="password"
+          placeholder="Password"
           secureTextEntry
+          textContentType="password"
         />
         <SubmitButton title="Login" />
-      </AppForm>
+      </Form>
     </Screen>
   );
-};
-
-export default LoginScreen;
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -56,3 +56,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+export default LoginScreen;
