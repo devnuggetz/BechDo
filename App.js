@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
+
+import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
-import NavigationTheme from "./app/navigation/navigationTheme";
 import OfflineNotice from "./app/components/OfflineNotice";
 import AuthNavigator from "./app/navigation/AuthNavigator";
-export default function App() {
+import AuthContext from "./app/auth/context";
+
+function App() {
+  const [user, setUser] = useState();
   return (
     <>
-      <OfflineNotice />
-      <NavigationContainer theme={NavigationTheme}>
-        <AuthNavigator />
-      </NavigationContainer>
+      <AuthContext.Provider value={{ user, setUser }}>
+        <OfflineNotice />
+        <NavigationContainer theme={navigationTheme}>
+          {user ? <AppNavigator /> : <AuthNavigator />}
+        </NavigationContainer>
+      </AuthContext.Provider>
     </>
   );
 }
-
-const styles = StyleSheet.create({});
+export default App;
